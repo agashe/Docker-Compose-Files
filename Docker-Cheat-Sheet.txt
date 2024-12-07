@@ -1,0 +1,25 @@
+* To Build Image/s :
+docker-compose build
+
+* To Run Docker Compose :
+docker-compose up
+
+* To Check Docker Compose :
+docker-compose ps
+
+* To Stop Docker Compose :
+docker-compose down
+
+* To Run Terminal Im Docker Compose :
+docker-compose exec php <your command>
+
+// using docker <not docker compose>
+1- Build:
+docker build -t test-java .
+
+2- Compile:
+MSYS_NO_PATHCONV=1 docker run --rm -v "$PWD":/usr/src/test test-java javac Main.java
+
+3- Run:
+MSYS_NO_PATHCONV=1 docker run --rm -v "$PWD":/usr/src/test test-java java Main
+

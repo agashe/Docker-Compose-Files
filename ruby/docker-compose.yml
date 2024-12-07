@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  postgres:
+    container_name: postgres
+    image: postgis/postgis:14-3.3-alpine
+    restart: always
+    environment:
+      POSTGRES_DB: pitchoon_db
+      POSTGRES_USER: pitchoon
+      POSTGRES_PASSWORD: pitchoon
+    ports: 
+      - '5432:5432'
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+
+  pitchoon-app:
+    container_name: pitchoon-app
+    build:
+      context: .
+      dockerfile: ./Dockerfile.ruby
+    volumes:
+      - ./:/app
+    links:
+      - postgres
+    ports:
+      - '3000:3000'
